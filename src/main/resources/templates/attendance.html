@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous" />
+
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <!-- Custom CSS -->
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!--navbar start-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand text-center" href="#">Student Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto text-uppercase">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/dashboard}">
+                        Welcome To, <span th:text="${username}"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " th:href="@{/logout}" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--navbar end-->
+
+    <div class="container">
+        <!-- Flash message -->
+        <div th:if="${message}" class="alert alert-warning" role="alert">
+            <p th:text="${message}"></p>
+        </div>
+        
+        <div th:if="${errorMessage}" class="alert alert-warning" role="alert">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <h1 class="mb-4">Mark Attendance</h1>
+        <form action="#" th:action="@{/attendance}" method="post">
+            <div class="form-group row">
+                <label for="studentId" class="col-sm-2 col-form-label">Select Student:</label>
+                <div class="col-sm-6">
+                    <select id="studentId" name="studentId" class="form-control">
+                        <option value="">Select Student</option>
+                        <!-- Iterate over students to generate options -->
+                        <option th:each="student : ${students}" th:value="${student.rollNo}"
+                            th:text="${student.firstName + ' ' + student.lastName}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 offset-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="present" name="present">
+                        <label class="form-check-label" for="present">Present</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Content -->
+    
+
+        <!-- Form to select student for viewing attendance records -->
+        <div class="container mt-5">
+            <h2 class="mb-4">Select Student</h2>
+            <form th:action="@{/student-attendance}" method="get">
+                <div class="form-group">
+                    <label for="studentId">Select Student:</label>
+                    <select class="form-control" id="studentId" name="studentId">
+                        <option value="">-- Select Student --</option>
+                        <!-- Iterate over students to generate options -->
+                        <option th:each="student : ${students}" th:value="${student.rollNo}"
+                            th:text="${student.firstName + ' ' + student.lastName}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <!-- Attendance Records Table -->
+            <h2 class="mt-5">Attendance Records</h2>
+            <table class="table mt-3">
+                <thead class="thead-dark">
+                    <tr>
+						<th>Roll No</th>
+						<th>Student Name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over attendance records -->
+                    <tr th:each="attendance : ${attendances}">
+						<td th:text="${attendance.student.rollNo}"></td>
+						<td th:text="${attendance.student.firstName +' '+attendance.student.lastName}"></td>
+                        <td th:text="${attendance.date}"></td>
+                        <td th:text="${attendance.present ? 'Present' : 'Absent'}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Student Deshboard</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<!--<script src="/resources/js/script.js"></script>-->
+	<!--	<link rel="stylesheet" type="text/css" href="/css/style.css" >-->
+	
+ <style>
+        /* Reset styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            overflow: hidden;
+        }
+        /* Header styles */
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        /* Slider styles */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            animation: slide-animation 15s infinite;
+        }
+        .slider img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        @keyframes slide-animation {
+            0%, 20% { transform: translateX(0); }
+            25%, 45% { transform: translateX(-100%); }
+            50%, 70% { transform: translateX(-200%); }
+            75%, 95% { transform: translateX(-300%); }
+            100% { transform: translateX(-400%); }
+        }
+        /* Main content styles */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .content {
+            text-align: justify;
+            margin-top: 20px;
+        }
+        /* Footer styles */
+        .footer {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+	
+</head>
+
+
+<body>
+
+
+	<!--navbar start-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+		<a class="navbar-brand text-center" href="#">Student Dashboard</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+			<ul class="navbar-nav ml-auto text-uppercase">
+				
+				
+<!--				<li class="nav-item active">-->
+<!--					<a class="nav-link" th:href="@{/deshboard}">-->
+<!--						Welcome To, <span th:text="${username}"></span>-->
+<!--					</a>-->
+<!--				</li>-->
+
+
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/registerForm}">SignUp</a>
+				</li>
+				
+				
+
+				<li class="nav-item">
+					<a class="nav-link " th:href="@{/login}" href="#">Login</a>
+				</li>
+
+
+			</ul>
+
+		</div>
+	</nav>
+	<!--navbar end-->
+
+
+<form th:action="@{/admin/saveBusRecords}" method="post">
+	
+	
+<!--	<div class="container mt-5">-->
+	
+<!--  <div class="row">	  -->
+	  
+<!--    <div class="col">-->
+<!--		<label class="mr-sm-2" for="inlineFormCustomSelect">From</label>-->
+<!--      <input required type="text" name="from" class="form-control" placeholder="from">-->
+<!--    </div>-->
+    
+    
+<!--    <div class="col">-->
+<!--		<label class="mr-sm-2" for="inlineFormCustomSelect">To</label>-->
+<!--      <input required type="text" name="to" class="form-control" placeholder="To">-->
+<!--    </div>    -->
+    
+<!--  </div>-->
+  
+  
+  
+<!--  <div class="row">	  -->
+	  
+<!--    <div class="col">-->
+<!--		<label class="mr-sm-2" for="inlineFormCustomSelect">Date</label>-->
+<!--      <input required type="date" name="date" class="form-control" placeholder="Date">-->
+<!--    </div>-->
+    
+    
+<!--    <div class="col">-->
+<!--		<label class="mr-sm-2" for="inlineFormCustomSelect">Price</label>-->
+<!--      <input required type="text" name="price" class="form-control" placeholder="Price">-->
+<!--    </div>    -->
+    
+<!--  </div>-->
+  
+  
+  
+<!--  <div class="row">	  -->
+	  
+<!--    <div class="col">-->
+<!--		<label class="mr-sm-2" for="inlineFormCustomSelect">BusName</label>-->
+<!--      <input required type="text" name="busname" class="form-control" placeholder="Bus Name">-->
+<!--    </div>-->
+    
+    
+<!--    <div class="col">-->
+<!--		<label class="mr-sm-2" for="inlineFormCustomSelect">Departure Time</label>-->
+<!--      <input required type="time" name="time" class="form-control" placeholder="Time">-->
+<!--    </div>    -->
+    
+<!--  </div>-->
+  
+  
+<!--  <div class="row mt-3 text-center">	  -->
+	  
+<!--    <div class="col">-->
+<!--		<button class="btn btn-primary" type="submit">Upload</button>-->
+<!--    </div>     -->
+    
+<!--  </div>-->
+<!--  </div>-->
+  
+  
+
+
+<header class="header">
+    <h1>University Name</h1>
+</header>
+
+<div class="slider-container">
+    <div class="slider">
+        <img src="collage-image1.jpg" alt="Slider Image 1">
+        <img src="collage-image2.jpg" alt="Slider Image 2">
+        <img src="collage-image3.jpg" alt="Slider Image 3">
+        <!-- Add more images as needed -->
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+        <h2 class="text-align:center">About Us</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et diam ultricies, commodo magna vel, bibendum nisi. Donec scelerisque elit nec eleifend facilisis. Proin ut velit leo. Mauris vel augue magna.</p>
+        <p>Integer tincidunt justo ac lacus venenatis volutpat. Integer nec lacus nec purus tempus auctor. Mauris quis sem ac nisi pharetra rhoncus.</p>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2024 University Name. All rights reserved.</p>
+</footer>
+
+  
+  
+  
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--	<div class="table-responsive">-->
+<!--		<table class="table table-hover">-->
+<!--			<thead class="thead-light">-->
+<!--				<tr>-->
+<!--					<th scope="col">#ID</th>-->
+<!--					<th scope="col">Name</th>-->
+<!--					<th scope="col">Email</th>-->
+<!--					<th scope="col">Phone</th>-->
+<!--					<th scope="col">Action</th>-->
+<!--				</tr>-->
+<!--			</thead>-->
+
+
+<!--			<tbody>-->
+<!--				<tr th:each="c: ${contacts}">-->
+<!--					<th scope="row" th:text="${'SCMUSER'+c.cId}">1</th>-->
+<!--					<td>-->
+
+<!--						<span th:text="${c.name}"></span>-->
+<!--					</td>-->
+<!--					<td>-->
+
+<!--						<a href="" th:href="@{'/user/'+${c.cId}+'/contact'}">-->
+<!--							<span th:text="${c.email}"></span>-->
+<!--						</a>-->
+
+<!--					</td>-->
+<!--					<td th:text="${c.phone}">@mdo</td>-->
+<!--					<td>-->
+
+<!--						javascript na function call karva mate th:onclick="|deleteContact(${c.cId})|-->
+<!--						<a href="#" th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger btn-sm">Delete</a>-->
+
+<!--						<form method="post" th:action="@{'/user/update-contact/' +${c.cId}}" class="mt-2">-->
+<!--							<button type="submit" class="btn btn-primary btn-sm">Update</button>-->
+<!--						</form>-->
+
+
+<!--					</td>-->
+<!--				</tr>-->
+<!--			</tbody>-->
+<!--		</table>-->
+<!--	</div>-->
+
+
+</body>
+
+</html>

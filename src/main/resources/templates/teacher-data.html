@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Data</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+    <!--navbar start-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand text-center" href="#">Student Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto text-uppercase">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/dashboard}">
+                        Welcome To,  <span th:text="${username}"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " th:href="@{/admin-dashboard}">Home</a>
+                </li>
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link " th:href="@{/manage-student}">Manage-Student</a>-->
+<!--                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link " th:href="@{/logout}" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--navbar end-->
+
+    <!--table -->
+    <p class="text-center">Teacher Data</p>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Date of Birth</th>						
+                    <th scope="col">Standard</th>					
+                    <th scope="col">Subject</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- Admins -->
+                <tr th:each="t: ${teachers}">
+                    <td th:text="${t.rollNo}">1</td>
+                    <td th:text="${t.firstName}"></td>
+                    <td th:text="${t.lastName}"></td>
+                    <td th:text="${t.email}"></td>
+                    <td th:text="${t.phone}"></td>
+                    <td th:text="${t.dob}"></td>
+                    <td th:text="${t.standard}"></td>
+                    <td th:text="${t.subject}"></td>
+                    <td th:text="${t.role}"></td>
+                    <td class="xyz">
+                        <!-- Action buttons for admin -->
+                        <form id="acceptAdminForm" method="post" th:action="@{'/teacher/delete/'+${t.rollNo}}" class="ml-1">
+                            <input type="hidden" name="id" th:value="${t.rollNo}" />
+                            <button id="acceptAdminBtn" type="submit" class="btn btn-success btn-sm">Delete</button>
+                        </form>
+                      
+                    </td>
+                </tr>
+
+                
+            </tbody>
+            
+  
+
+
+
+        </table>
+    </div>
+</body>
+
+</html>

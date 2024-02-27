@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+    <!--navbar start-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand text-center" href="#">Student Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto text-uppercase">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/dashboard}">
+                        Welcome To, <span th:text="${username}"></span>
+                    </a>
+                </li>
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link " th:href="@{/teacher-data}">Teacher</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link " th:href="@{/manage-student}">Student</a>-->
+<!--                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link " th:href="@{/logout}" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--navbar end-->
+
+    <!--table -->
+     <h2 class="text-center text-bold opacity-50">Welcome To Admin Dashboard</h2>
+    
+     <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Teacher Dashboard</h5>
+                        <p class="card-text">Click below to manage students.</p>
+                        <a th:href="@{/student}" class="btn btn-primary">Manage</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Teacher List</h5>
+                        <p class="card-text">Click below to See Teacher List.</p>
+                        <a th:href="@{/teacher-data}" class="btn btn-primary">Manage</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Student List</h5>
+                        <p class="card-text">Click below to See Student List.</p>
+                        <a th:href="@{/student-data}" class="btn btn-primary">Manage</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Pending Request</h5>
+                        <p class="card-text">Click below to manage Pending Request.</p>
+                        <a th:href="@{/pendingRequest}" class="btn btn-primary">Manage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
+</body>
+
+</html>

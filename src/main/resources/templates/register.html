@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <style>
+        .show-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Student Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto text-uppercase">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/home}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login}" href="#">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End of Navbar -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="my-card">
+                        <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert"
+                            role="alert">
+                            <p class="text-center" th:text="${session.message.content}"></p>
+                            <th:block th:text="${@studentServiceImpl.removeSessionMessage()}"></th:block>
+                        </div>
+                        <div class="container text-center">
+                            <img class="" style="width: 80px;" th:src="@{/img/icon.png}" alt="" />
+                        </div>
+                        <h1 class="text-center">Register Here !!</h1>
+                        <form action="" th:action="@{/register}" method="post" onsubmit="return validateForm()">
+                            <!-- First Name Field -->
+                            <div class="form-group">
+                                <label for="username_field">First Name</label>
+                                <input required="required" type="text" name="firstName" class="form-control" id="username_field"
+                                    placeholder="Enter First Name" autofocus="autofocus">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname_field">Last Name</label>
+                                <input required="required" type="text" name="lastName" class="form-control" id="lastname_field"
+                                    placeholder="Enter Last Name" autofocus="autofocus">
+                            </div>
+                            <!-- Email Field -->
+                            <div class="form-group">
+                                <label for="email_field">Email</label>
+                                <input type="email" name="email" class="form-control" id="email_field"
+                                    placeholder="Enter Email" required="required">
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <label for="phone_field">Phone</label>
+                                <input type="phone" name="phone" class="form-control" id="phone_field"
+                                    placeholder="Enter Phone" required="required">
+                            </div>
+                            
+                            
+                            <!-- Password Field -->
+                            <div class="form-group">
+                                <label for="password_field">Password</label>
+                                <input type="password" name="password" class="form-control" id="password_field"
+                                    placeholder="Enter Password" required="required">
+                            </div>
+                            <!-- Confirm Password Field -->
+                            <div class="form-group">
+                                <label for="confirmPassword_field">Confirm Password</label>
+                                <input type="password" name="confirmPassword" class="form-control"
+                                    id="confirmPassword_field" placeholder="Enter Confirm Password" required="required">
+                                <div id="passwordMismatch" class="invalid-feedback" style="display: none;">
+                                    Passwords do not match
+                                </div>
+                            </div>
+                            <!-- Date of Birth Field -->
+                            <div class="form-group">
+                                <label for="dob_field">Date of Birth</label>
+                                <input type="date" name="dob" class="form-control" id="dob_field"
+                                    placeholder="Enter Date of Birth" required="required">
+                            </div>
+                            <!-- Role Field -->
+                            <div class="form-group">
+                                <label for="role">Select Role:</label>
+                                <select class="form-control" id="role" name="role">
+                                    <option value="">Please select</option>
+                                    <option value="STUDENT">STUDENT</option>
+                                    <option value="TEACHER">TEACHER</option>
+                                    <option value="ADMIN">ADMIN</option>
+                                </select>
+                            </div>
+                            <!-- Hidden Fields for Teacher -->
+                            <div class="show-hidden">
+                                <div class="form-group">
+                                    <label for="standard_field">Standard</label>
+                                    <input type="text" name="standard" class="form-control" id="standard_field"
+                                        placeholder="Enter Standard">
+                                </div>
+                            
+                            
+                                  
+                                <div class="form-group">
+                                    <label for="subject_field">Subject</label>
+                                    <input type="text" name="subject" class="form-control" id="subject_field"
+                                        placeholder="Enter Subject">
+                                </div>
+                            </div>
+                            <!-- Button -->
+                            <div class="container text-center">
+                                <button type="submit" class="btn bg-primary text-white">Register</button></br>
+                                <span>Already Register?<a th:href="@{/login}">Login Here</a></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- JavaScript -->
+    <script>
+        function validateForm() {
+            var password = document.getElementById("password_field").value;
+            var confirmPassword = document.getElementById("confirmPassword_field").value;
+            var passwordMismatch = document.getElementById("passwordMismatch");
+
+            if (password !== confirmPassword) {
+                passwordMismatch.style.display = "block";
+                return false;
+            } else {
+                passwordMismatch.style.display = "none";
+                return true;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const roleSelect = document.getElementById('role');
+            const showHidden = document.querySelector('.show-hidden');
+
+            roleSelect.addEventListener('change', function () {
+                if (roleSelect.value === 'Teacher') {
+                    showHidden.style.display = 'block';
+                } else {
+                    showHidden.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

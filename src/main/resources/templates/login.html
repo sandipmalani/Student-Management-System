@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login Page</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<!--<script src="/resources/js/script.js"></script>-->
+
+<!--	<link rel="stylesheet" type="text/css" href="/css/style.css" >-->
+</head>
+
+<body>
+
+
+	<!--    navbar-->
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="#">Student Management System</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+			<ul class="navbar-nav ml-auto text-uppercase">
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/home}">Home <span class="sr-only">(current)</span></a>
+				</li>
+
+
+
+
+
+
+<!--				<li class="nav-item">-->
+<!--					<a class="nav-link " th:href="@{/login}">Login</a>-->
+<!--				</li>-->
+
+				<li class="nav-item">
+					<a class="nav-link " th:href="@{/registerForm}" href="#">Signup</a>
+				</li>
+
+
+			</ul>
+
+		</div>
+	</nav>
+
+
+	<!--end of navbar-->
+
+
+
+
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="my-card">
+
+						<!--                         ${session.message.type} session ma message ave to j alert ave ena mate and kai type ni alert se ena mate session.messag.type type thi success se ke error se green or dred specified karva mate-->
+
+
+
+
+
+
+<!--						<div class="container text-center">-->
+<!--							<img class="" style="width: 80px;" th:src="@{/img/icon.png}" alt="" />-->
+<!--						</div>-->
+
+						<h1 class="text-center">Login !!</h1>
+
+                                <div th:if="${param.logout}" class="alert alert-success">
+									<p>You have been logged out !</p>
+								</div>
+
+
+
+
+<!--						 Display error message if present -->
+<!--						<div th:if="${param.error}" class="alert alert-danger">-->
+<!--							<p th:text="${param.error}"></p>-->
+<!--						</div>-->
+
+
+
+
+
+
+
+
+						<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert"
+							role="alert">
+							<p class="text-center" th:text="${session.message.content}"></p>
+
+							<!--							ek alert apya pasi remove karva mate-->
+							<th:block th:text="${@adminServiceImpl.removeSessionMessage()}"></th:block>
+						</div>
+
+
+
+						<form novalidate action="" th:action="@{/doLogin}" method="post">
+
+
+							<!--						Email field				-->
+							<div class="form-group">
+								<label for="username_field">Email</label>
+
+								<input type="email" name="email" class="form-control " id="email_field"
+									placeholder="Enter Email" required="required" / autofocus="autofocus">
+
+
+							</div>
+
+
+
+
+
+
+
+
+							<!--					password field				-->
+							<div class="form-group">
+								<label for="password_field">Password</label>
+
+								<input type="password" name="password" class="form-control" id="password_field"
+									placeholder="Enter password" required="required" />
+
+							</div>
+
+
+							<!-- button-->
+
+							<div class="container text-center">
+								<button type="submit" class="btn bg-primary text-white">
+									Login
+								</button>
+
+								<span>
+									New User?<a th:href="@{/registerForm}">Regestration Here</a>
+								</span>
+
+								<!--								<button type="reset" class="btn btn-warning">-->
+								<!--									Reset-->
+								<!--								</button>-->
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

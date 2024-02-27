@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Dashboard</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+		
+		<!-- SweetAlert CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+
+
+	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+	<!--navbar start-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand text-center" href="#">Student Management System</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto text-uppercase">
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/dashboard}">
+						Welcome To, <span th:text="${username}"></span>
+					</a>
+				</li>
+				<!--                <li class="nav-item">-->
+				<!--                    <a class="nav-link " th:href="@{/teacher-data}">Teacher</a>-->
+				<!--                </li>-->
+				<!--                <li class="nav-item">-->
+				<!--                    <a class="nav-link " th:href="@{/manage-student}">Student</a>-->
+				<!--                </li>-->
+				<li class="nav-item">
+					<a class="nav-link " th:href="@{/logout}" href="#">Logout</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<!--navbar end-->
+
+
+
+
+	<!--         Add Student Form -->
+	<!--        <div class="card mb-4">-->
+	<!--            <div class="card-header">-->
+	<!--                Add New Student-->
+	<!--            </div>-->
+	<!--            <div class="card-body">-->
+	<!--                <form>-->
+	<!--                    <div class="form-group">-->
+	<!--                        <label for="firstName">First Name</label>-->
+	<!--                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name">-->
+	<!--                    </div>-->
+	<!--                    <div class="form-group">-->
+	<!--                        <label for="lastName">Last Name</label>-->
+	<!--                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name">-->
+	<!--                    </div>-->
+	<!--                    <div class="form-group">-->
+	<!--                        <label for="email">Email</label>-->
+	<!--                        <input type="email" class="form-control" id="email" placeholder="Enter email">-->
+	<!--                    </div>-->
+	<!--                    <div class="form-group">-->
+	<!--                        <label for="phone">Phone</label>-->
+	<!--                        <input type="text" class="form-control" id="phone" placeholder="Enter phone number">-->
+	<!--                    </div>-->
+	<!--                    <button type="submit" class="btn btn-primary">Add Student</button>-->
+	<!--                </form>-->
+	<!--            </div>-->
+	<!--        </div>-->
+
+	<!-- Add Student Modal -->
+	<form th:action="@{/add-student}" method="post">
+	<div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			
+			
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addStudentModalLabel">Add New Student</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<!-- Add student form here -->
+					
+						<div class="form-group">
+							<label for="firstName">First Name</label>
+							<input type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter first name">
+						</div>
+						<div class="form-group">
+							<label for="lastName">Last Name</label>
+							<input type="text" class="form-control" name="lastName" id="lastName" placeholder="Enter last name">
+						</div>
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
+						</div>
+						<div class="form-group">
+							<label for="phone">Phone</label>
+							<input type="text" class="form-control" name="phone" id="phone" placeholder="Enter phone number">
+						</div>
+						
+						<div class="form-group">
+							<label for="phone">Date OF birth</label>
+							<input type="date" class="form-control" name="dob" id="dob" placeholder="Enter Date of Birth">
+						</div>
+						
+						<div class="form-group">
+							<label for="password">Password/label>
+							<input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
+						</div>
+						
+						<div class="form-group">
+							<label for="role">Role</label>
+							<select class="form-control" name="role" id="role">
+								<option value="">Select Course</option>
+								<option value="STUDENT">STUDENT</option>
+								
+								<!-- Add more options as needed -->
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="course">Course</label>
+							<select class="form-control" name="course" id="course">
+								<option value="">Select Course</option>
+								<option value="Mechanical Engg">Mechanical Engg.</option>
+								<option value="Computer Engg">Computer Engg.</option>
+								<option value="Information Technology">Information Technology</option>
+								<option value="Electronics & Communication">Electronics & Communication</option>
+								<option value="Textile Engg">Textile Engg.</option>
+								<option value="Electrical Engg">Electrical Engg.</option>
+								<!-- Add more options as needed -->
+							</select>
+						</div>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Add Student</button>
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+	</form>
+	
+	
+	
+<!--	edit form-->
+
+
+	<form th:action="@{/edit-student}" method="post" th:object="${student}">
+	<div class="modal fade" id="editStudentModal" tabindex="-1" role="dialog" aria-labelledby="editStudentModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			
+			
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editStudentModalLabel">Add New Student</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<!-- Add student form here -->
+					
+						<div class="form-group">
+							<label for="firstName">First Name</label>
+							<input type="text" class="form-control"  name="firstName" id="firstName" placeholder="Enter first name">
+						</div>
+						<div class="form-group">
+							<label for="lastName">Last Name</label>
+							<input type="text" class="form-control" name="lastName" id="lastName" placeholder="Enter last name">
+						</div>
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="email" class="form-control"  name="email" id="email" placeholder="Enter email">
+						</div>
+						<div class="form-group">
+							<label for="phone">Phone</label>
+							<input type="text" class="form-control"  name="phone" id="phone" placeholder="Enter phone number">
+						</div>
+						
+						<div class="form-group">
+							<label for="phone">Date OF birth</label>
+							<input type="date" class="form-control"  name="dob" id="dob" placeholder="Enter Date of Birth">
+						</div>
+						
+						<div class="form-group">
+							<label for="password">Password/label>
+							<input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
+						</div>
+						
+						<div class="form-group">
+							<label for="role">Role</label>
+							<select class="form-control" name="role"  id="role">
+								<option value="">Select Course</option>
+								<option value="Student">Student</option>
+								
+								<!-- Add more options as needed -->
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="course">Course</label>
+							<select class="form-control" name="course"  id="course">
+								<option value="">Select Course</option>
+								<option value="Mechanical Engg">Mechanical Engg.</option>
+								<option value="Computer Engg">Computer Engg.</option>
+								<option value="Information Technology">Information Technology</option>
+								<option value="Electronics & Communication">Electronics & Communication</option>
+								<option value="Textile Engg">Textile Engg.</option>
+								<option value="Electrical Engg">Electrical Engg.</option>
+								<!-- Add more options as needed -->
+							</select>
+						</div>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Add Student</button>
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+	</form>
+
+	<!-- Page Content -->
+	<div class="container mt-2">
+		<h3 class="mb-2">Manage Students</h3>
+
+		<!-- Button to open Add Student Modal -->
+		<div class="text-right">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStudentModal">
+				Add Student
+			</button>
+		</div>
+
+		<!-- Student List -->
+		<div class="card mt-2">
+			<div class="card-header">
+				Student List
+			</div>
+			<div class="card-body">
+				<!-- Table of student data -->
+				
+				 <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">course</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                <!-- Admins -->
+                <tr th:each="t: ${students}">
+                    <td th:text="${t.rollNo}">1</td>
+                    <td th:text="${t.firstName}"></td>
+                    <td th:text="${t.lastName}"></td>
+                    <td th:text="${t.email}"></td>
+                    <td th:text="${t.phone}"></td>
+                    
+                    <td th:text="${t.course}"></td>
+                   
+                    <td th:text="${t.role}"></td>
+                    <td class="xyz">
+                        <!-- Action buttons for admin -->
+                        <form id="acceptAdminForm" method="post" th:action="@{'/student/edit/'+${t.rollNo}}" class="ml-1">
+                            <input type="hidden" name="id" th:value="${t.rollNo}" />
+                            <button  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editStudentModal"
+                            	
+                            	>Edit</button>
+                        </form>
+                        <form id="deleteStudentForm" method="post" th:action="@{'/student/delete/'+${t.rollNo}}" class="ml-1">
+                            <input type="hidden" name="id" th:value="${t.rollNo}" />
+                            <button type="button" class="btn btn-danger btn-sm deleteStudentBtn" data-student-id="${t.rollNo}">Delete</button>
+                        </form>
+                      
+                    </td>
+                </tr>
+
+                
+            </tbody>
+                </table>
+			</div>
+		</div>
+	</div>
+	<!-- End Page Content -->
+	
+	
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+    // Wait for the document to be ready
+    $(document).ready(function () {
+        // Add click event listener to all delete buttons
+        $('.deleteStudentBtn').click(function () {
+            // Get the form associated with the clicked delete button
+            var form = $(this).closest('form');
+
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this student data!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                // If user clicks on confirm button
+                if (result.isConfirmed) {
+                    // Submit the form for deletion
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+
+	<!-- Bootstrap JS and dependencies -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+
+</body>
+
+</html>
